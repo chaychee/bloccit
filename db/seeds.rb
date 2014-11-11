@@ -40,17 +40,22 @@ posts = Post.all
 end
 
 
-user = User.first
+user = User.find(1)
 user.skip_reconfirmation!
 user.update_attributes!(
-  name: 'Jonathan Goodwin',
-  email: 'jonathan.d.goodwin@gmail.com',
+  name: 'JG',
+  email: 'jg@jg.com',
   password: 'asdfasdf'
 )
 
-
-
-puts "user after my section #{user.inspect}"
+user = User.find(2)
+user.skip_reconfirmation!
+user.update_attributes!(
+  name: 'Admin',
+  email: 'admin@jg.com',
+  password: 'asdfasdf',
+  role: 'admin'
+)
 
  
 puts "Seed finished"
