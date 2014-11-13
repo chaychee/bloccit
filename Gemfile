@@ -58,6 +58,13 @@ gem 'pundit'
 # Markdown support
 gem 'redcarpet'
 
+# Image upload and manipulation support
+gem 'carrierwave'
+gem 'mini_magick'
+
+# S3 support
+gem 'fog'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
