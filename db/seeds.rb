@@ -20,9 +20,10 @@ end
 users=User.all
 
 # Create Topics
-25.times do
+25.times do |i|
   Topic.create!(
-      name:   Faker::Lorem.sentence,
+#      name: Faker::Lorem.sentence,
+      name:   "Topic #{i}",
       description:  Faker::Lorem.paragraph
     )
 end
