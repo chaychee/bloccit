@@ -40,6 +40,12 @@ module ApplicationHelper
     puts output
     output = "<div class=\"pagination\"><a class=\"previous_page\" rel=\"prev start\" href=\"/topics?page=1\">&#8592; Previous</a><a rel=\"prev start\" href=\"/topics?page=1\">1</a><em class=\"current\">2</em><span class=\"next_page disabled\">Next &#8594;</span></div>".html_safe
     content_tag(:div, class: "pagination") do 
+      # take the objects and iterate
+      objects.each_with_index do |object, index|
+        p object.inspect
+        p index     
+      end
+
       content_tag(:p, "Hello world!")
     end
   end 
