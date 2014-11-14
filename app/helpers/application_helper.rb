@@ -16,38 +16,57 @@ module ApplicationHelper
     (redcarpet.render text).html_safe
   end
 
+
   def will_paginate (objects)
-    #"<h1>will_paginate stub</h1>".html_safe
-    
-
-    # Sample code from posts
-
-    # "<div class="pagination"><span class="previous_page disabled">&#8592; Previous</span> <em class="current">1</em> <a rel="next" href="/topics/6?page=2">2</a> <a class="next_page" rel="next" href="/topics/6?page=2">Next &#8594;</a></div>"
-    
-    # Sample code for topics
-    # ? How does it know the controller path??? to build
-    # # Also needs to know total pages in the record set (up to a max)
-
-    # Retrieve current page and page count state information
+    # Retrieve current page and page count state information from collection
+    # Don't render anything unless there is more than one page
     return nil unless objects && objects[0] && objects[0].paginate_page && objects[0].paginate_total_pages
-    current_page = objects[0].paginate_page
-    total_pages = objects[0].paginate_total_pages
-    puts "total_pages #{total_pages}"
+    current_page = objects[0].paginate_page.to_i
+    total_pages = objects[0].paginate_total_pages.to_i
+    puts "current_page #{current_page}  total_pages #{total_pages}"
     return nil unless (total_pages > 1)
 
-    # build the html.  
-    output = content_tag(:p, "Hello world!")
-    puts output
-    output = "<div class=\"pagination\"><a class=\"previous_page\" rel=\"prev start\" href=\"/topics?page=1\">&#8592; Previous</a><a rel=\"prev start\" href=\"/topics?page=1\">1</a><em class=\"current\">2</em><span class=\"next_page disabled\">Next &#8594;</span></div>".html_safe
+    index_url = url_for_collection(objects)
+    puts page_url(index_url,1)
+
+    # Build pagination html
     content_tag(:div, class: "pagination") do 
-      # take the objects and iterate
-      objects.each_with_index do |object, index|
-        p object.inspect
-        p index     
+      # Build the html for the previous link.  Disable if we are on the first page.
+      if (current_page == 1)
+        concat(content_tag(:span, '&#8592; Previous'.html_safe, class: "previous_page disabled")) 
+      else
+        concat(link_to('&#8592; Previous'.html_safe, page_url(index_url, current_page-1), class: "previous_page"))
+      end
+      concat(" ")
+      
+      # Build a page link for each page.  Disable the link on the current page.
+      1.upto(total_pages) do |page_num|
+        if(page_num==current_page)
+          concat(content_tag(:em, "#{page_num}", class: "current"))
+        else
+          concat(link_to("#{page_num}", page_url(index_url, page_num)))
+        end
+        concat(" ")
       end
 
-      content_tag(:p, "Hello world!")
+      if (current_page == total_pages)
+        concat(content_tag(:span, 'Next &#8594;'.html_safe, class: "next_page disabled")) 
+      else
+        concat(link_to('Next &#8594;'.html_safe, page_url(index_url, current_page+1), class: "next_page"))
+      end
     end
   end 
+
+  #TODO Review with mentor.  Is there not a helper that can take an array of objects
+  # and return the controller mapped url?
+  # e.g. url_for @posts  yields /posts. 
+  def url_for_collection(objects)
+    url = url_for(objects[0])
+    url[0, url.rindex('/')]
+  end
+
+  def page_url(url, page)
+    "#{url}?page=#{page}"
+  end
 
 end

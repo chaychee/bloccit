@@ -15,18 +15,7 @@ class Topic < ActiveRecord::Base
 #   do_something_with(relation_of_ten)
 # end
 
-  # default 10.  Can override
-  @@per_page = 10
-
-  def self.per_page
-    @@oaginate_per_page
-  end
   
-  def self.per_page=(per_page)
-    @@paginate_per_page = per_page
-  end
-
-   
   @paginate_total_pages
   @paginate_page
 
@@ -37,22 +26,19 @@ class Topic < ActiveRecord::Base
   # :per_page - number of records per page
   # note this will return array of Record objects
   def self.paginate(options)
-    #TODO
-    p options.inspect
+    # :page is required key.  If no page value supplied, default to page 1.
+    page = options.fetch(:page) { raise ArgumentError, ":page parameter required" } || "1"
+  
+    # Default to 10 if not specified
+    per_page = options[:per_page] || 10
+
+    # Compute the total pages based on total record count
+    record_count = self.count
+    total_pages = (record_count > 0) ? ((record_count-1)/per_page).to_i + 1 : 0
+
+    rel = self.limit(per_page).offset((page.to_i-1)*per_page)
     
-    # TODO per_page value should use explicitly declared in method, class override, or global default
-    # as per will_paginate
-    page = (options[:page]) ? (options[:page].to_i - 1) : 0
-    per_page = options[:per_page] || self.per_page
-
- 
-    # Compute the total pages based on total record count 
-    total_pages = (per_page > 0) ? ((self.count+1)/per_page).to_i + 1 : 0
-
-    puts "self.paginate page = #{page}, per_page = #{per_page}, total_pages = #{total_pages}"
-
-
-    rel = self.limit(per_page).offset(page*per_page)
+    # TODO Store paging state information in the objects themselves for now
     rel.each do |relation|
       relation.paginate_page = page
       relation.paginate_total_pages = total_pages
