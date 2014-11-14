@@ -19,12 +19,18 @@ class Topic < ActiveRecord::Base
   @@per_page = 10
 
   def self.per_page
-    @@per_page
+    @@oaginate_per_page
   end
   
   def self.per_page=(per_page)
-    @@per_page = per_page
+    @@paginate_per_page = per_page
   end
+
+   
+  @paginate_total_pages
+  @paginate_page
+
+  attr_accessor :paginate_total_pages, :paginate_page
 
   # #paginate(options) ⇒ Object
   # :page - page number to get
@@ -39,9 +45,19 @@ class Topic < ActiveRecord::Base
     page = (options[:page]) ? (options[:page].to_i - 1) : 0
     per_page = options[:per_page] || self.per_page
 
-    puts "self.paginate page = #{page}, per_page = #{per_page}"
+ 
+    # Compute the total pages based on total record count 
+    total_pages = (per_page > 0) ? ((self.count+1)/per_page).to_i + 1 : 0
 
-    self.limit(per_page).offset(page*per_page)
+    puts "self.paginate page = #{page}, per_page = #{per_page}, total_pages = #{total_pages}"
+
+
+    rel = self.limit(per_page).offset(page*per_page)
+    rel.each do |relation|
+      relation.paginate_page = page
+      relation.paginate_total_pages = total_pages
+    end
+    rel
   end
 
 end

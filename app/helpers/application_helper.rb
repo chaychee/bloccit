@@ -28,9 +28,20 @@ module ApplicationHelper
     # ? How does it know the controller path??? to build
     # # Also needs to know total pages in the record set (up to a max)
 
-    output = "<div class=\"pagination\"><a class=\"previous_page\" rel=\"prev start\" href=\"/topics?page=1\">&#8592; Previous</a> <a rel=\"prev start\" href=\"/topics?page=1\">1</a> <em class=\"current\">2</em> <span class=\"next_page disabled\">Next &#8594;</span></div>".html_safe
+    # Retrieve current page and page count state information
+    return nil unless objects && objects[0] && objects[0].paginate_page && objects[0].paginate_total_pages
+    current_page = objects[0].paginate_page
+    total_pages = objects[0].paginate_total_pages
+    puts "total_pages #{total_pages}"
+    return nil unless (total_pages > 1)
+
+    # build the html.  
+    output = content_tag(:p, "Hello world!")
     puts output
-    output
+    output = "<div class=\"pagination\"><a class=\"previous_page\" rel=\"prev start\" href=\"/topics?page=1\">&#8592; Previous</a><a rel=\"prev start\" href=\"/topics?page=1\">1</a><em class=\"current\">2</em><span class=\"next_page disabled\">Next &#8594;</span></div>".html_safe
+    content_tag(:div, class: "pagination") do 
+      content_tag(:p, "Hello world!")
+    end
   end 
 
 end
