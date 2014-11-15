@@ -7,10 +7,6 @@ module Paginate
 
   module ClassMethods
 
-    def hasstaticpaginatemethod?
-      true
-    end
-
     # #paginate(options) ⇒ Object
     # :page - page number to get
     # :per_page - number of records per page
