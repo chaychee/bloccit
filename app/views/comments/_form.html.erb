@@ -1,0 +1,16 @@
+<%= form_for [topic, post, comment] do |f| %>
+  <h4>Add a Comment:</h4>
+  <% if comment.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>There are <%= pluralize(comment.errors.count, "error") %></h4>
+      <ul>
+        <% comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= f.label :body %>
+    <%= f.text_field :body%>
+    <%= f.submit "Create Comment", class: 'btn btn-success' %>
+<% end %>
