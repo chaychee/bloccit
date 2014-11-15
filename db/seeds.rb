@@ -39,6 +39,18 @@ topics=Topic.all
     topic:  topics.sample
  )
 end
+
+firsttopic = Topic.first
+30.times do |i|
+  Post.create!(
+#      name: Faker::Lorem.sentence,
+      user:   users.sample, 
+      title:   "Post #{i}",
+      body:  Faker::Lorem.paragraph,
+      topic:  firsttopic
+    )
+end
+
 posts = Post.all
 
 # Create Comments
@@ -81,4 +93,3 @@ puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
- 

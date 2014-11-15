@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
- # include Paginate
+  include Paginate
   mount_uploader :image, ImageUploader
 
   has_many :comments
