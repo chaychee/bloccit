@@ -27,7 +27,7 @@
     <div class="js-comments">
       <%= render @post.comments %>
     </div>
-    <% if policy(@post.comments.new).create?  %>
+    <% if policy(Comment.new).create?  %>
       <div class="new-comment">
         <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @post.comments.new }  %>
       </div>
