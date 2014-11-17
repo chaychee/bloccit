@@ -1,8 +1,16 @@
-<p>
-  <%= comment.body %>
-  <% if comment.user %>
-    <small>
-      <em><%= comment.user.name || comment.user.email %></em>
-    </small>
+<div class="media">
+  <% if comment.user.avatar? %>
+    <%= link_to "#", class: "pull-left" do %>
+      <%= image_tag (comment.user.avatar.small.url) %>
+    <% end %>
   <% end %>
-</p>
+  <div class="media-body">
+    <%= content_tag(:small) do %>
+      <%= (comment.user.name || comment.user.email) %> commented <%= time_ago_in_words(comment.created_at) %> ago
+      <% if policy(comment).destroy? %>
+       | <%= link_to "Delete", [@topic, @post, comment], method: :delete %>
+      <% end %>
+    <% end %>
+    <%= content_tag(:p, comment.body) %>
+  </div>
+</div>
