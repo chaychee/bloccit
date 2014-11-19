@@ -11,19 +11,19 @@ describe Post do
 
     describe '#up_votes' do
       it "counts the number of votes with value = 1" do
-        expect ( @post.up_votes ).to eq(3)
+        expect( @post.up_votes ).to eq(3)
       end
     end
 
     describe '#down_votes' do
       it "counts the number of votes with value = -1" do
-        expect ( @post.down_votes ).to eq(2)
+        expect( @post.down_votes ).to eq(2)
       end
     end
 
     describe '#points' do
       it "returns the sum of all up and down votes" do
-        expect ( @post.points ).to eq(1)
+        expect( @post.points ).to eq(1)
       end
     end    
   end  
