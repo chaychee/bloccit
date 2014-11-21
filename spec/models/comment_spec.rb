@@ -15,6 +15,9 @@ describe Comment do
     it "sends an email to users who have favorited the post" do
       @user.favorites.where(post: @post).create 
 
+      # Test doubles are "strict" by default -- messages that have not been specifically
+      # allowed or expected will trigger an error. Use allow(...).to receive(...) to configure
+      # which messages are the double is allowed to receive.
       allow( FavoriteMailer )
         .to receive(:new_comment)
         .with(@user, @post, @comment)
