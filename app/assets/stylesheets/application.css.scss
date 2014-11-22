@@ -1,18 +1,22 @@
 @import "bootstrap";
 
- .user-info {
-   margin-top: 9px;
- }
- 
- .nav {
-   margin-top: 5px;
- }
+.user-info {
+  margin-top: 9px;
+}
 
- .vote-arrows {
+.nav {
+  margin-top: 5px;
+}
+
+.vote-arrows {
   width: 40px;
   text-align: center;
- }
+}
 
- .favorite {
-   margin-top: 20px;
- }
+.favorite {
+  margin-top: 20px;
+}
+
+.voted {
+  opacity: 0.5;
+}
