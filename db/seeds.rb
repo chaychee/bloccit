@@ -56,7 +56,7 @@ user = User.find(1)
 user.skip_reconfirmation!
 user.update_attributes!(
   name: 'Admin User',
-  email: 'admin@jg.com',
+  email: 'admin@example.com',
   password: 'asdfasdf',
   role: 'admin'
 )
@@ -65,7 +65,7 @@ user = User.find(2)
 user.skip_reconfirmation!
 user.update_attributes!(
   name: 'Moderator User',
-  email: 'moderator@jg.com',
+  email: 'moderator@example.com',
   password: 'asdfasdf',
   role: 'moderator'
 )
@@ -74,7 +74,7 @@ user = User.find(3)
 user.skip_reconfirmation!
 user.update_attributes!(
   name: 'Member User',
-  email: 'member@jg.com',
+  email: 'jonathan.d.goodwin@gmail.com',
   password: 'asdfasdf'
 )
  

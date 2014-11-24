@@ -27,7 +27,7 @@ describe Post do
       end
     end    
 
-    describe '##save_with_initial_vote' do
+    describe '#save_with_initial_vote' do
       it "generates an up-vote when explicitly called" do
         post = associated_post
         expect( post.up_votes ).to eq(0)

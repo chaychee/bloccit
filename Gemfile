@@ -71,7 +71,17 @@ gem 'will_paginate', '~> 3.0.5'
 # Test framework
 group :test do
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'capybara'
 end
+
+# For improved error reporting
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
+# For performance monitoring
+gem 'newrelic_rpm'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

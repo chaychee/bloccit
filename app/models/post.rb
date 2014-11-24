@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
 
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   belongs_to :user
   belongs_to :topic
 
@@ -13,6 +14,8 @@ class Post < ActiveRecord::Base
   validates :topic, presence: true
   validates :user, presence: true
 
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
+  
   def up_votes
     votes.where(value: 1).count
   end
