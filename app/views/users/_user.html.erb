@@ -1,0 +1,16 @@
+<div class="media">
+  <% if user.avatar? %>
+    <%= link_to user, class: "pull-left" do %>
+      <%= image_tag (user.avatar.profile.url) %>
+    <% end %>
+  <% end %>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <%= link_to user.name, user, class: 'media-heading' %>
+    </h4>
+    <%= content_tag(:small) do %>
+      <%= pluralize(user.posts.count, 'post') %>,
+      <%= pluralize(user.comments.count, 'comment') %>
+    <% end %>
+  </div>
+</div>
