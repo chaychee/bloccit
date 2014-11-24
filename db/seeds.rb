@@ -38,8 +38,7 @@ topics=Topic.all
     topic:  topics.sample
  )
   post.update_attribute(:created_at, rand(10.minutes..1.year).ago)
-  post.create_vote
-  post.update_rank
+  post.save_with_initial_vote
 end
 posts = Post.all
 
@@ -84,4 +83,5 @@ puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{Vote.count} votes created"
  
