@@ -4,7 +4,7 @@ describe Post do
   describe "vote methods" do
 
     before do
-      @post = associated_post
+      @post = create(:post)
       3.times { @post.votes.create(value: 1) }
       2.times { @post.votes.create(value: -1) }
     end
@@ -29,7 +29,7 @@ describe Post do
 
     describe '#save_with_initial_vote' do
       it "generates an up-vote when explicitly called" do
-        post = associated_post
+        post = create(:post)
         expect( post.up_votes ).to eq(0)
         post.save_with_initial_vote
         expect( post.up_votes ).to eq(1)
