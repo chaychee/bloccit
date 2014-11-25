@@ -74,6 +74,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'pry-rails'
 end
 
 # For improved error reporting
