@@ -3,18 +3,12 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.11'
 
-# Use sqlite3 as the database for Active Record
-#gem 'sqlite3'
- group :production do
-   gem 'pg'
-   gem 'rails_12factor'
- end
+# Use postgres as the default database for Active Record
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
  
- group :development do
-   gem 'sqlite3'
-   gem 'pry-rails'
- end
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
@@ -69,13 +63,19 @@ gem 'fog'
 # Pagination support
 gem 'will_paginate', '~> 3.0.5'
 
+# debugging support
+group :development, :test do
+  gem 'sqlite3'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+end
+
 # Test framework
 group :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails', '~> 4.0'
-  gem 'pry-rails'
 end
 
 # For improved error reporting
