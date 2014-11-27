@@ -31,14 +31,15 @@
 <br/>
 <div class="row">
   <h2>Comments</h2>
- <div class="col-md-12">
+  <div class="col-md-8">
+    <% if policy(Comment.new).create?  %>
+      <div class="new-comment">
+        <%= render partial: 'comments/form', locals: { post: @post, comment: Comment.new } %>
+      </div>
+      <br/>
+    <% end %>
     <div class="js-comments">
       <%= render partial: 'comments/comment', collection: @comments %>
     </div>
-    <% if policy(Comment.new).create?  %>
-      <div class="new-comment">
-        <%= render 'comments/form' %>
-      </div>
-    <% end %>
   </div>
 </div>
