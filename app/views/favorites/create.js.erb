@@ -1,4 +1,4 @@
-$('.favorite').replaceWith("<%= escape_javascript(render partial: 'favorite', locals: { post: @post }) %>");
+$('#favorite-' + <%= @post.id %>).replaceWith("<%= escape_javascript(render partial: 'favorite', locals: { post: @post }) %>");
 <% if @favorite.valid? == false %>
-   $('.favorite').prepend("<div class='alert alert-danger'>There was an error favoriting the post.</div>");
+   $('#favorite-' + <%= @post.id %>).prepend("<div class='alert alert-danger'>There was an error favoriting the post.</div>");
 <% end %>
