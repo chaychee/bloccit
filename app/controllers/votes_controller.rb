@@ -1,14 +1,21 @@
 class VotesController < ApplicationController
+  respond_to :html, :js
   before_action :load_post_and_vote
 
   def up_vote
     update_vote!(1)
-    redirect_to :back
+  
+    respond_with(@vote) do |format|
+      format.html { redirect_to :back }
+    end
   end
 
   def down_vote
     update_vote!(-1)
-    redirect_to :back
+
+    respond_with(@vote) do |format|
+      format.html { redirect_to :back }
+    end
   end
 
   private

@@ -11,12 +11,8 @@ class CommentsController < ApplicationController
 
     authorize @comment
 
-    if @comment.save
-      flash[:notice] = "Comment was created."
-    else
-      flash[:error] = "There was an error saving the comment. Please try again."
-    end
-
+    @comment.save
+    
     respond_with(@comment) do |format|
       format.html { redirect_to [@post.topic, @post] }
     end
@@ -27,11 +23,8 @@ class CommentsController < ApplicationController
     @topic = @post.topic
     @comment = @post.comments.find(params[:id])
     authorize @comment
-    if @comment.destroy
-      flash[:notice] = "Comment was deleted."
-    else
-      flash[:error] = "There was an error deleting the comment."
-    end
+
+    @comment.destroy
 
     respond_with(@comment) do |format|
       format.html { redirect_to [@post.topic, @post] }

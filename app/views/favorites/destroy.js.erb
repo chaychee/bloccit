@@ -1,0 +1,4 @@
+$('#favorite-' + <%= @post.id %>).replaceWith("<%= escape_javascript(render partial: 'favorite', locals: { post: @post }) %>");
+<% if @favorite.destroyed? == false %>
+   $('#favorite-' + <%= @post.id %>).prepend("<div class='alert alert-danger'>There was an error unfavoriting the post.</div>");
+<% end %>

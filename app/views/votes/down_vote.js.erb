@@ -1,0 +1,2 @@
+$('#vote-arrows-' + <%= @post.id %>).replaceWith("<%= escape_javascript(render partial: 'votes/voter', locals: { post: @post }) %>");
+$('.js-points-summary').replaceWith("<%= escape_javascript(render partial: 'votes/points', locals: { post: @post }) %>");
