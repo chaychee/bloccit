@@ -1,7 +1,7 @@
 <% if current_user %>
   <%= form_for [post, comment], remote: true do |f| %>
     <% if comment.errors.any? %>
-      <div class="alert alert-danger">
+      <div class="alert alert-danger comment-form-status">
         <ul>
           <% comment.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
