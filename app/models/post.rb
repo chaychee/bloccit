@@ -1,7 +1,11 @@
 class Post < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
-  has_many :comments, dependent: :destroy
+  include MongoMysqlRelations
+
+  from_mysql_has_many :comments, :class => Comment, :foreign_key => "post_id"
+# TODO Mongo destroy?
+#  has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
   belongs_to :user

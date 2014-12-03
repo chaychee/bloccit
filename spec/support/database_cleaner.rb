@@ -1,7 +1,8 @@
 RSpec.configure do |config|
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner[:active_record].strategy = :truncation
+    DatabaseCleaner[:mongoid].strategy = :truncation
   end
 
   config.before(:each) do

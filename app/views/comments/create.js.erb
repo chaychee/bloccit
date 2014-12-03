@@ -3,7 +3,7 @@
   $('.new-comment').prepend("<div class='alert alert-success comment-form-status'>Comment was added</div>");
   $data = $("<%= escape_javascript(render(@comment)) %>").hide();
   $('.js-comments').prepend($data);
-  $('#comment-' + <%= @comment.id %>).slideDown();
+  $('<%= escape_javascript("#comment-#{@comment.id}") %>').slideDown();
 <% else %>
   $('.new-comment').html("<%= escape_javascript(render partial: 'comments/form', locals: { post: @post, comment: @comment }) %>");
 <% end %>

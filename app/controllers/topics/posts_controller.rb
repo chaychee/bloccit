@@ -2,7 +2,7 @@ class Topics::PostsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
-    @comments = @post.comments
+    @comments = @post.comments.order_by(:updated_at => 'desc')
   end
 
   def new

@@ -8,7 +8,11 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
- 
+
+# mongodb orm
+gem 'mongoid', "~> 4.0.0"
+gem 'mongo_mysql_relations'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
@@ -65,6 +69,8 @@ gem 'will_paginate', '~> 3.0.5'
 
 # debugging support
 group :development, :test do
+  gem 'pg'
+  gem 'mysql2'
   gem 'sqlite3'
   gem 'pry-rails'
   gem 'pry-byebug'

@@ -24,6 +24,10 @@ describe Comment do
           .with(@user, @post, @comment)
           .and_return( double(deliver: true) )
 
+        # this was missing from Bloccit's source code
+        expect( FavoriteMailer )
+          .to receive(:new_comment)
+
         @comment.save
       end
 

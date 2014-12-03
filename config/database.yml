@@ -1,18 +1,42 @@
 development:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: chaychee_bloccit_development
   pool: 5
-  username: jonathan
-  password: 
+  username: root
+  password:
+  host: localhost
+  port: 3306
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
   database: chaychee_bloccit_test
   pool: 5
-  username: jonathan
-  password: 
+  username: root
+  password:
+  host: localhost
+  port: 3306
+
+
+
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: chaychee_bloccit_development
+#   pool: 5
+#   username: jonathan
+#   password: 
+
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: chaychee_bloccit_test
+#   pool: 5
+#   username: jonathan
+#   password: 
 
 
 # SQLite version 3.x
